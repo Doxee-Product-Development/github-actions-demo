@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Doxee CI Pipeline
 
 on:
   push:
@@ -14,6 +14,12 @@ on:
   pull_request:
     branches: [ "main" ]
 
+steps:
+  build: &build
+    run: | 
+      echo "Building maven project"
+      mvn $MAVEN_OPTIONS clean package -DskipIntegrationTests
+    
 jobs:
   build:
 
@@ -27,8 +33,7 @@ jobs:
         java-version: '21'
         distribution: 'corretto'
         cache: maven
-    - name: Build with Maven
-      run: | 
-        echo "Building maven project"
-        mvn $MAVEN_OPTIONS clean package -DskipIntegrationTests
+    - name: Build & Test
+      <<: *build
+
 
