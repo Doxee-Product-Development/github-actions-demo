@@ -27,11 +27,17 @@ jobs:
         cache: maven
     - name: Build & Test
       uses: ./.github/actions/build
-  deployment:
+  deployment-dev:
     runs-on: ubuntu-latest
     environment: dev
     steps:
       - name: deploy 
         run: echo "Deploy on $NAME"
+  deployment-prod:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: deploy 
+        run: echo "Deploy on ${{ vars.NAME }}"        
 
 
