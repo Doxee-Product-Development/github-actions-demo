@@ -16,9 +16,7 @@ on:
     
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
@@ -29,5 +27,11 @@ jobs:
         cache: maven
     - name: Build & Test
       uses: ./.github/actions/build
+  deployment:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: deploy 
+        run: echo "Deploy on $NAME"
 
 
