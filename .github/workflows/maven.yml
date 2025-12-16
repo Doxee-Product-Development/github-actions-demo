@@ -13,12 +13,6 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
-steps:
-  build: &build
-    run: | 
-      echo "Building maven project"
-      mvn $MAVEN_OPTIONS clean package -DskipIntegrationTests
     
 jobs:
   build:
@@ -34,6 +28,6 @@ jobs:
         distribution: 'corretto'
         cache: maven
     - name: Build & Test
-      <<: *build
+      uses: ./.github/actions/build
 
 
