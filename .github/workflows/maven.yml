@@ -33,6 +33,22 @@ jobs:
     steps:
       - name: deploy 
         run: echo "Deploy on $NAME"
+      - shell: bash
+        run: |
+          1.0.0 > version.txt        
+      - name: Share VERSION variable
+        uses: actions/upload-artifact@v4
+        with:
+          name: version
+          path: version.txt
+      - name: Download version from build step
+        uses: actions/download-artifact@v5
+        with:
+          name: version
+      - shell: bash
+        run: |
+          value=`cat version.txt`
+          echo "version $value"
   deployment-prod:
     runs-on: ubuntu-latest
     environment: production
