@@ -1,0 +1,9 @@
+name: build
+author: vlupia
+description: Maven Clean Package
+runs:
+  using: composite
+  steps:
+    - name: Clean Package
+      shell: bash
+      run: mvn clean package -DskipIntegrationTests
